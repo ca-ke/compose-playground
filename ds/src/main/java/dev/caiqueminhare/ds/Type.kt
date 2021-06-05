@@ -1,4 +1,4 @@
-package dev.caiqueminhare.ui.theme
+package dev.caiqueminhare.ds
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

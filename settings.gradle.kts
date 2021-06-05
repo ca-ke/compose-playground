@@ -8,4 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "compose-playground"
 include(":app")
- 
+include(":ds")
+include(":login")
