@@ -3,7 +3,10 @@ package dev.caiqueminhare.login.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.material.*
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.Composable
@@ -15,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.caiqueminhare.ds.AliceBlue
 import dev.caiqueminhare.ds.Purple200
 
 @Composable
@@ -60,8 +62,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     label = { Text(text = "Usuário") },
-                    visualTransformation = PasswordVisualTransformation(),
-                    leadingIcon = { Icons.Filled.Email },
+                    trailingIcon = { Icons.Filled.Email },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Gray,
                     )
@@ -77,13 +78,20 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = 16.dp),
                     label = { Text(text = "Senha") },
                     visualTransformation = PasswordVisualTransformation(),
-                    leadingIcon = { Icons.Filled.Email },
+                    trailingIcon = { Icons.Filled.Email },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Gray,
                     )
+                )
+                Text(
+                    text = "Esqueceu a sua senha?",
+                    color = Color.Blue,
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(end = 16.dp)
                 )
             }
         }
