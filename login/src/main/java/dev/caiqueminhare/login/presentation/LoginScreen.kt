@@ -1,22 +1,25 @@
 package dev.caiqueminhare.login.presentation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.material.Surface
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.caiqueminhare.ds.AliceBlue
 import dev.caiqueminhare.ds.Purple200
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(loginViewModel: LoginViewModel) {
     Box {
         Surface(
             color = Purple200,
@@ -36,7 +39,53 @@ fun LoginScreen() {
                     bottomEnd = ZeroCornerSize
                 )
         ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                var typedUser = remember { mutableStateOf("Usuário") }
+                var typedPassword = remember { mutableStateOf("Senha") }
 
+                OutlinedTextField(
+                    value = typedPassword.value,
+                    onValueChange = { textFieldValue ->
+                        typedPassword.value = textFieldValue
+                        loginViewModel.onTextChanged(
+                            typedText = textFieldValue,
+                            textFieldType = "password"
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    label = { Text(text = "Usuário") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    leadingIcon = { Icons.Filled.Email },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Gray,
+                    )
+                )
+                OutlinedTextField(
+                    value = typedPassword.value,
+                    onValueChange = { textFieldValue ->
+                        typedPassword.value = textFieldValue
+                        loginViewModel.onTextChanged(
+                            typedText = textFieldValue,
+                            textFieldType = "password"
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    label = { Text(text = "Senha") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    leadingIcon = { Icons.Filled.Email },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Gray,
+                    )
+                )
+            }
         }
     }
 }
@@ -44,5 +93,5 @@ fun LoginScreen() {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(LoginViewModel())
 }

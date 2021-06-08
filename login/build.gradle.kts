@@ -53,6 +53,7 @@ dependencies {
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.compose.ui:ui:1.0.0-beta08")
     implementation("androidx.compose.material:material:1.0.0-beta08")
+    implementation("androidx.compose.material:material-icons-core:1.0.0-beta08")
     implementation("androidx.compose.ui:ui-tooling:1.0.0-beta08")
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta08")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
