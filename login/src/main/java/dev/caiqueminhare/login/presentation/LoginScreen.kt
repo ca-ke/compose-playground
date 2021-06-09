@@ -15,9 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import java.time.format.TextStyle
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel) {
@@ -26,7 +28,9 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
             color = MaterialTheme.colors.primary,
             modifier = Modifier.fillMaxSize()
         ) {
-
+            Column {
+                Text(text = "Bem-vindo de volta, Caíque!", fontStyle = FontStyle.Normal, style = MaterialTheme.typography.h4, modifier = Modifier.padding(all = 16.dp))
+            }
         }
         Surface(
             color = MaterialTheme.colors.surface,
