@@ -31,7 +31,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
         Surface(
             color = MaterialTheme.colors.surface,
             modifier = Modifier
-                .height(600.dp)
+                .height(400.dp)
                 .fillMaxWidth()
                 .align(Alignment.BottomStart),
             shape = RoundedCornerShape(60.dp)
