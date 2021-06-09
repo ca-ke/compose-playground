@@ -8,6 +8,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -16,19 +18,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.caiqueminhare.ds.ComposePlaygroundTheme
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel) {
     Box {
         Surface(
-            color = ComposePlaygroundTheme.colors.primary,
+            color = MaterialTheme.colors.primary,
             modifier = Modifier.fillMaxSize()
         ) {
 
         }
         Surface(
-            color = ComposePlaygroundTheme.colors.primary,
+            color = MaterialTheme.colors.surface,
             modifier = Modifier
                 .height(600.dp)
                 .fillMaxWidth()
@@ -44,18 +45,21 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                val typedUser = remember { mutableStateOf("Usuário") }
-                val typedPassword = remember { mutableStateOf("Senha") }
+                val typedUser: String by loginViewModel.userFieldState.observeAsState("")
+                val typedUserError: Boolean by loginViewModel.userFieldErrorState.observeAsState(false)
+                val typedPassword : String by loginViewModel.passwordFieldState.observeAsState("")
+                val typedPasswordError : Boolean by loginViewModel.passwordFieldErrorState.observeAsState(false)
 
                 OutlinedTextField(
-                    value = typedUser.value,
+                    value = typedUser,
                     onValueChange = { textFieldValue ->
-                        typedUser.value = textFieldValue
                         loginViewModel.onTextChanged(
                             typedText = textFieldValue,
-                            textFieldType = "password"
+                            textFieldType = "user"
                         )
                     },
+                    isError = typedUserError,
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -66,14 +70,15 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                     )
                 )
                 OutlinedTextField(
-                    value = typedPassword.value,
+                    value = typedPassword,
                     onValueChange = { textFieldValue ->
-                        typedPassword.value = textFieldValue
                         loginViewModel.onTextChanged(
                             typedText = textFieldValue,
                             textFieldType = "password"
                         )
                     },
+                    isError = typedPasswordError,
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
