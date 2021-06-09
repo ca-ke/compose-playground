@@ -3,6 +3,11 @@ package dev.caiqueminhare.login.presentation
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
+
+    fun doLogin() {
+
+    }
+
     fun onTextChanged(typedText: String, textFieldType: String) {
         when (textFieldType) {
             "login" -> {

@@ -3,12 +3,10 @@ package dev.caiqueminhare.login.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,19 +16,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.caiqueminhare.ds.Purple200
+import dev.caiqueminhare.ds.ComposePlaygroundTheme
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel) {
     Box {
         Surface(
-            color = Purple200,
+            color = ComposePlaygroundTheme.colors.primary,
             modifier = Modifier.fillMaxSize()
         ) {
 
         }
         Surface(
-            color = Color.White,
+            color = ComposePlaygroundTheme.colors.primary,
             modifier = Modifier
                 .height(600.dp)
                 .fillMaxWidth()
@@ -46,13 +44,13 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                var typedUser = remember { mutableStateOf("Usuário") }
-                var typedPassword = remember { mutableStateOf("Senha") }
+                val typedUser = remember { mutableStateOf("Usuário") }
+                val typedPassword = remember { mutableStateOf("Senha") }
 
                 OutlinedTextField(
-                    value = typedPassword.value,
+                    value = typedUser.value,
                     onValueChange = { textFieldValue ->
-                        typedPassword.value = textFieldValue
+                        typedUser.value = textFieldValue
                         loginViewModel.onTextChanged(
                             typedText = textFieldValue,
                             textFieldType = "password"
@@ -62,7 +60,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     label = { Text(text = "Usuário") },
-                    trailingIcon = { Icons.Filled.Email },
+                    leadingIcon = { Icon(Icons.Filled.Email, "usuário") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Gray,
                     )
@@ -81,7 +79,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                         .padding(horizontal = 16.dp),
                     label = { Text(text = "Senha") },
                     visualTransformation = PasswordVisualTransformation(),
-                    trailingIcon = { Icons.Filled.Email },
+                    leadingIcon = { Icon(Icons.Filled.Lock, "senha") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Gray,
                     )
@@ -93,6 +91,16 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                         .align(Alignment.End)
                         .padding(end = 16.dp)
                 )
+
+                Button(
+                    onClick = loginViewModel::doLogin,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, top = 64.dp),
+                    contentPadding = PaddingValues(16.dp),
+                ) {
+                    Text(text = "Entrar")
+                }
             }
         }
     }
