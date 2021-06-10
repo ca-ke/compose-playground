@@ -10,8 +10,6 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +17,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import java.time.format.TextStyle
+import dev.caiqueminhare.login.domain.model.ButtonState
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel) {
@@ -29,7 +27,12 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
             modifier = Modifier.fillMaxSize()
         ) {
             Column {
-                Text(text = "Bem-vindo de volta, Caíque!", fontStyle = FontStyle.Normal, style = MaterialTheme.typography.h4, modifier = Modifier.padding(all = 16.dp))
+                Text(
+                    text = "Bem-vindo de volta, Caíque!",
+                    fontStyle = FontStyle.Normal,
+                    style = MaterialTheme.typography.h4,
+                    modifier = Modifier.padding(all = 16.dp)
+                )
             }
         }
         Surface(
@@ -50,9 +53,13 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 val typedUser: String by loginViewModel.userFieldState.observeAsState("")
-                val typedUserError: Boolean by loginViewModel.userFieldErrorState.observeAsState(false)
-                val typedPassword : String by loginViewModel.passwordFieldState.observeAsState("")
-                val typedPasswordError : Boolean by loginViewModel.passwordFieldErrorState.observeAsState(false)
+                val typedUserError: Boolean by loginViewModel.userFieldErrorState.observeAsState(
+                    false
+                )
+                val typedPassword: String by loginViewModel.passwordFieldState.observeAsState("")
+                val typedPasswordError: Boolean by loginViewModel.passwordFieldErrorState.observeAsState(
+                    false
+                )
 
                 OutlinedTextField(
                     value = typedUser,
@@ -98,7 +105,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                     color = Color.Blue,
                     modifier = Modifier
                         .align(Alignment.End)
-                        .padding(end = 16.dp)
+                        .padding(top = 4.dp, end = 16.dp)
                 )
 
                 Button(
@@ -108,7 +115,20 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                         .padding(start = 16.dp, end = 16.dp, top = 64.dp),
                     contentPadding = PaddingValues(16.dp),
                 ) {
-                    Text(text = "Entrar")
+                    val buttonState: ButtonState by loginViewModel.buttonState.observeAsState(
+                        ButtonState.Enabled
+                    )
+
+                    when (buttonState) {
+                        is ButtonState.Enabled -> Text(text = "Entrar")
+
+                        else -> {
+                            CircularProgressIndicator(
+                                color = Color.White,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
                 }
             }
         }
