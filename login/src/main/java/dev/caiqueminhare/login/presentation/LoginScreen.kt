@@ -1,6 +1,5 @@
 package dev.caiqueminhare.login.presentation
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
@@ -14,12 +13,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.caiqueminhare.login.R
 import dev.caiqueminhare.login.domain.model.ButtonState
 
 @Composable
@@ -33,7 +29,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
         ) {
 
         }
-        Column{
+        Column {
             Surface(
                 color = MaterialTheme.colors.surface,
                 modifier = Modifier
